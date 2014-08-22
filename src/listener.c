@@ -1,8 +1,11 @@
-/*
+tokenize/*
  * File Name : listener.c 
  * Author : Gaurav Tungatkar
  * Creation Date : 16-01-2011
  * Description :
+ * Here is implmented the socket conection handler and start the http server in a soon of this proces.
+ * Parallelization is performed with process and not threads.
+ * 
  *
  */
 #include <assert.h>
@@ -70,7 +73,7 @@ int connection_handler(struct http_server_config *cfg)
                 }
                 LOG(stdout, "new connection accepted\n");
                 //fork a new process to handle this request
-                if((pid = fork()) == -1)
+                if((pid = fork()) == -1) // ----------------> Parallelization with FORK.
                 {
                         //LOG Error
                         LOG(stdout, "Error in fork\n");
